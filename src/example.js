@@ -25,7 +25,7 @@ process.stdin.resume();
 
 const format = (ary) => {
   return ary.map((r) => (
-    r.map((item) => (item.color === 'grey'? ' ' : '■')).join()
+    r.map((item) => (item.color === 'grey'? ' ' : '■')).join(' ')
   ))
 };
 
