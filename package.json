@@ -1,0 +1,77 @@
+{
+  "name": "fp-tetris",
+  "version": "1.0.0",
+  "description": "module for fp-tetris-game",
+  "homepage": "https://github.com/afrontend/fp-tetris",
+  "author": {
+    "name": "Bob Hwang",
+    "email": "frontend.wordpress@gmail.com",
+    "url": "https://agvim.wordpress.com/"
+  },
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "keywords": [
+    "tetris",
+    "game",
+    "javascript"
+  ],
+  "devDependencies": {
+    "coveralls": "^3.0.2",
+    "eslint": "^5.9.0",
+    "prettier": "^1.15.2",
+    "husky": "^1.2.0",
+    "lint-staged": "^8.1.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-config-xo": "^0.25.0",
+    "jest": "^23.5.0"
+  },
+  "engines": {
+    "npm": ">= 8.0.0"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.json": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "xo",
+      "prettier"
+    ],
+    "env": {
+      "jest": true,
+      "node": true
+    },
+    "rules": {
+      "prettier/prettier": "off",
+      "capitalized-comments": [
+        "off"
+      ]
+    },
+    "plugins": [
+      "prettier"
+    ]
+  },
+  "scripts": {
+    "pretest": "eslint .",
+    "test": "jest",
+    "start": "node src/example.js"
+  },
+  "repository": "https://autoscripts@bitbucket.org/autoscripts/fp-tetris.git",
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "clear": "^0.1.0",
+    "lodash": "^4.17.11"
+  }
+}
