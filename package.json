@@ -72,6 +72,7 @@
   "license": "MIT",
   "dependencies": {
     "clear": "^0.1.0",
+    "keypress": "^0.2.1",
     "lodash": "^4.17.11"
   }
 }
