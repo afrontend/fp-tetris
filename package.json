@@ -9,7 +9,8 @@
     "url": "https://agvim.wordpress.com/"
   },
   "files": [
-    "lib"
+    "lib",
+    "src"
   ],
   "main": "lib/index.js",
   "bin": {
