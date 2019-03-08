@@ -9,10 +9,10 @@ const global = {
 keypress(process.stdin);
 
 process.stdin.on('keypress', function (ch, key) {
-  if (key && key.ctrl && key.name == 'c') {
+  if (key && key.ctrl && key.name === 'c') {
     process.exit();
   }
-  if (key && key.name == 'q') {
+  if (key && key.name === 'q') {
     process.exit();
   }
   if (key) {
