@@ -1,7 +1,7 @@
 {
   "name": "fp-tetris",
   "version": "0.0.1",
-  "description": "module for fp-tetris-game",
+  "description": "library for fp-tetris-game",
   "homepage": "https://github.com/afrontend/fp-tetris",
   "author": {
     "name": "Bob Hwang",
@@ -12,6 +12,9 @@
     "lib"
   ],
   "main": "lib/index.js",
+  "bin": {
+    "fp-tetris": "./src/example.js"
+  },
   "keywords": [
     "tetris",
     "game",
