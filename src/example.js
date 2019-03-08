@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const clear = require('clear');
 const fpTetris = require('../lib/index.js');
 const keypress = require('keypress');
