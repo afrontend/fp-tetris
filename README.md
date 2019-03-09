@@ -4,10 +4,12 @@
 ## Installation
 
 ```sh
-$ npm install
+git clone https://github.com/afrontend/fp-tetris.git
+cd fp-tetris
+npm install
 ```
 
-## Usage
+## Run
 
 ```sh
 $ npm start
