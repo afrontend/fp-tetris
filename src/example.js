@@ -34,5 +34,5 @@ global.timer = setInterval(() => {
   global.state = fpTetris.downTetrisTable(global.state);
   clear();
   console.log(format(fpTetris.joinTetrisTable(global.state)));
-}, 700);
+}, 400);
 
