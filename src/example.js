@@ -4,7 +4,7 @@ const fpTetris = require('../lib/index.js');
 const keypress = require('keypress');
 
 const global = {
-  state: fpTetris.initTetrisTable()
+  state: fpTetris.initTetrisTable(20, 30)
 };
 
 keypress(process.stdin);
