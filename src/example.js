@@ -46,7 +46,6 @@ const startGame = (rows = 17, columns = 15) => {
 }
 
 const activate = (program) => {
-  console.log(program.full);
   if (program.full) {
     startGame(process.stdout.rows - 2, (process.stdout.columns / 2) - 4 );
   } else {
