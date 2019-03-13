@@ -1,6 +1,6 @@
 {
   "name": "fp-tetris",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "library for fp-tetris-game",
   "homepage": "https://github.com/afrontend/fp-tetris",
   "author": {
