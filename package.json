@@ -69,7 +69,7 @@
     "test": "jest",
     "start": "node src/example.js"
   },
-  "repository": "https://autoscripts@bitbucket.org/autoscripts/fp-tetris.git",
+  "repository": "https://github.com/afrontend/fp-tetris.git",
   "jest": {
     "testEnvironment": "node"
   },
