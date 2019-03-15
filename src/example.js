@@ -42,7 +42,7 @@ const startGame = (rows = 17, columns = 15) => {
     global.state = fpTetris.downTetrisTable(global.state);
     clear();
     console.log(format(fpTetris.joinTetrisTable(global.state)));
-  }, 400);
+  }, 300);
 }
 
 const activate = (program) => {
