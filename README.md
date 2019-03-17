@@ -1,6 +1,8 @@
 # fp-tetris [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
 > library for [fp-tetris-game](https://github.com/afrontend/fp-tetris-game)
 
+![console tetris screenshot](https://agvim.files.wordpress.com/2019/03/fp-tetris.png "console tetris screenshot")
+
 ## Installation
 
 ```sh
