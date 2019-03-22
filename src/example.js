@@ -37,14 +37,16 @@ const startGame = (rows = 17, columns = 15) => {
 
   global.timer = setInterval(() => {
     global.state = fpTetris.downTetrisTable(global.state);
-    clear();
+    if (!program.full) {
+      clear();
+    }
     console.log(format(fpTetris.joinTetrisTable(global.state)));
-  }, 300);
+  }, 200);
 };
 
 const activate = program => {
   if (program.full) {
-    startGame(process.stdout.rows - 2, process.stdout.columns / 2 - 4);
+    startGame(process.stdout.rows - 1, process.stdout.columns / 2 - 4);
   } else {
     startGame();
   }
