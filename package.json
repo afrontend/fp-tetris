@@ -17,9 +17,9 @@
     "fp-tetris": "./src/example.js"
   },
   "keywords": [
+    "javascript",
     "tetris",
-    "game",
-    "javascript"
+    "game"
   ],
   "devDependencies": {
     "coveralls": "^3.0.2",
@@ -55,10 +55,7 @@
       "node": true
     },
     "rules": {
-      "prettier/prettier": "off",
-      "capitalized-comments": [
-        "off"
-      ]
+      "prettier/prettier": "error"
     },
     "plugins": [
       "prettier"
@@ -67,7 +64,7 @@
   "scripts": {
     "pretest": "eslint .",
     "test": "jest",
-    "start": "node src/example.js"
+    "start": "node ./src/example.js"
   },
   "repository": "https://github.com/afrontend/fp-tetris.git",
   "jest": {
