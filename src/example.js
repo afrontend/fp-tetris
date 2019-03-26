@@ -12,7 +12,7 @@ program
 
 const startGame = (rows = 17, columns = 15) => {
   const global = {
-    state: fpTetris.initTetrisTable(rows, columns)
+    state: fpTetris.init(rows, columns)
   };
 
   keypress(process.stdin);
@@ -25,7 +25,7 @@ const startGame = (rows = 17, columns = 15) => {
       process.exit();
     }
     if (key) {
-      global.state = fpTetris.keyTetrisTable(key.name, global.state);
+      global.state = fpTetris.key(key.name, global.state);
     }
   });
 
@@ -36,11 +36,11 @@ const startGame = (rows = 17, columns = 15) => {
     ary.map(r => r.map(item => (item.color === "grey" ? " " : "■")).join(" "));
 
   global.timer = setInterval(() => {
-    global.state = fpTetris.downTetrisTable(global.state);
+    global.state = fpTetris.tick(global.state);
     if (!program.full) {
       clear();
     }
-    console.log(format(fpTetris.joinTetrisTable(global.state)));
+    console.log(format(fpTetris.join(global.state)));
   }, 200);
 };
 
