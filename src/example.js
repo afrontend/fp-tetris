@@ -10,6 +10,8 @@ program
   .option("-f, --full", "terminal full size")
   .parse(process.argv);
 
+const getMark = item => (item.color === "grey" ? " " : "■");
+
 const startGame = (rows = 17, columns = 15) => {
   const global = {
     state: fpTetris.init(rows, columns)
@@ -33,7 +35,7 @@ const startGame = (rows = 17, columns = 15) => {
   process.stdin.resume();
 
   const format = ary =>
-    ary.map(r => r.map(item => (item.color === "grey" ? " " : "■")).join(" "));
+    ary.map(r => r.map(item => getMark(item)).join(" ")).join("\r\n");
 
   global.timer = setInterval(() => {
     global.state = fpTetris.tick(global.state);
@@ -46,7 +48,7 @@ const startGame = (rows = 17, columns = 15) => {
 
 const activate = program => {
   if (program.full) {
-    startGame(process.stdout.rows - 1, process.stdout.columns / 2 - 4);
+    startGame(process.stdout.rows - 1, process.stdout.columns / 2 - 1);
   } else {
     startGame();
   }
