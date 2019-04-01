@@ -12,7 +12,7 @@ program
 
 const getMark = item => (item.color === "grey" ? " " : "■");
 
-const startGame = (rows = 17, columns = 15) => {
+const startGame = (rows = 17, columns = 17) => {
   const global = {
     state: fpTetris.init(rows, columns)
   };
