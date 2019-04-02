@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const _ =  require("lodash");
 const clear = require("clear");
 const keypress = require("keypress");
 const program = require("commander");
@@ -16,9 +17,17 @@ const dump = (state) => {
   console.log(JSON.stringify(state));
 }
 
-const startGame = (rows = 17, columns = 17) => {
+const save = (global) => {
+  global.savedState = _.cloneDeep(global.state);
+}
+
+const load = (global) => {
+  global.state = global.savedState;
+}
+
+const startGame = ({ rows, columns, state } = { rows: 17, columns: 17 }) => {
   const global = {
-    state: fpTetris.init(rows, columns)
+    state: fpTetris.init({ rows, columns, state })
   };
 
   keypress(process.stdin);
@@ -29,6 +38,12 @@ const startGame = (rows = 17, columns = 17) => {
     }
     if (key && key.name === "q") {
       process.exit();
+    }
+    if (key && key.name === "s") {
+      save(global);
+    }
+    if (key && key.name === "l") {
+      load(global);
     }
     if (key && key.ctrl && key.name === "d") {
       dump(global.state);
