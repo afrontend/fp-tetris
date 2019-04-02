@@ -12,6 +12,10 @@ program
 
 const getMark = item => (item.color === "grey" ? " " : "■");
 
+const dump = (state) => {
+  console.log(JSON.stringify(state));
+}
+
 const startGame = (rows = 17, columns = 17) => {
   const global = {
     state: fpTetris.init(rows, columns)
@@ -24,6 +28,10 @@ const startGame = (rows = 17, columns = 17) => {
       process.exit();
     }
     if (key && key.name === "q") {
+      process.exit();
+    }
+    if (key && key.ctrl && key.name === "d") {
+      dump(global.state);
       process.exit();
     }
     if (key) {
