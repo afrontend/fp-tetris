@@ -11,7 +11,7 @@ program
   .option("-f, --full", "terminal full size")
   .parse(process.argv);
 
-const getMark = item => (item.color === "grey" ? " " : "■");
+const getMark = item => (fpTetris.isBlank(item) ? " " : "■");
 
 const dump = (state) => {
   console.log(JSON.stringify(state));
