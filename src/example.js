@@ -3,7 +3,7 @@ const _ = require("lodash");
 const clear = require("clear");
 const keypress = require("keypress");
 const program = require("commander");
-const fpTetris = require("../lib/index.js");
+const game = require("../lib/index.js");
 const pkg = require("../package.json");
 
 program
@@ -11,7 +11,7 @@ program
   .option("-f, --full", "terminal full size")
   .parse(process.argv);
 
-const getMark = item => (fpTetris.isBlank(item) ? " " : "■");
+const getMark = item => (game.isBlank(item) ? " " : "■");
 
 const dump = state => {
   console.log(JSON.stringify(state));
@@ -27,7 +27,7 @@ const load = global => {
 
 const startGame = ({ rows, columns, state } = { rows: 17, columns: 17 }) => {
   const global = {
-    state: fpTetris.init({ rows, columns, state })
+    state: game.init({ rows, columns, state })
   };
 
   keypress(process.stdin);
@@ -50,7 +50,7 @@ const startGame = ({ rows, columns, state } = { rows: 17, columns: 17 }) => {
       process.exit();
     }
     if (key) {
-      global.state = fpTetris.key(key.name, global.state);
+      global.state = game.key(key.name, global.state);
     }
   });
 
@@ -61,11 +61,11 @@ const startGame = ({ rows, columns, state } = { rows: 17, columns: 17 }) => {
     ary.map(r => r.map(item => getMark(item)).join(" ")).join("\r\n");
 
   global.timer = setInterval(() => {
-    global.state = fpTetris.tick(global.state);
+    global.state = game.tick(global.state);
     if (!program.full) {
       clear();
     }
-    console.log(format(fpTetris.join(global.state)));
+    console.log(format(game.join(global.state)));
   }, 200);
 };
 
