@@ -19,7 +19,7 @@ $ npm start
 
 ## License
 
-MIT © [Bob Hwang](https://agvim.wordpress.com/)
+MIT © [Bob Hwang](https://agvim.wordpress.com)
 
 [npm-image]: https://badge.fury.io/js/fp-tetris.svg
 [npm-url]: https://npmjs.org/package/fp-tetris

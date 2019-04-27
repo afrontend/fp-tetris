@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const _ =  require("lodash");
+const _ = require("lodash");
 const clear = require("clear");
 const keypress = require("keypress");
 const program = require("commander");
@@ -13,17 +13,17 @@ program
 
 const getMark = item => (fpTetris.isBlank(item) ? " " : "■");
 
-const dump = (state) => {
+const dump = state => {
   console.log(JSON.stringify(state));
-}
+};
 
-const save = (global) => {
+const save = global => {
   global.savedState = _.cloneDeep(global.state);
-}
+};
 
-const load = (global) => {
+const load = global => {
   global.state = global.savedState;
-}
+};
 
 const startGame = ({ rows, columns, state } = { rows: 17, columns: 17 }) => {
   const global = {
