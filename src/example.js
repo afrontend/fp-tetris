@@ -58,7 +58,7 @@ const startGame = ({ rows, columns, state } = { rows: 17, columns: 17 }) => {
   process.stdin.resume();
 
   const format = ary =>
-    ary.map(r => r.map(item => getMark(item)).join(" ")).join("\r\n");
+    ary.map(r => r.map(item => getMark(item)).join(" ")).join("|\r\n");
 
   global.timer = setInterval(() => {
     global.state = game.tick(global.state);
