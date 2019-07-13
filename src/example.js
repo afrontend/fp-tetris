@@ -21,7 +21,7 @@ const save = global => {
   global.savedState = _.cloneDeep(global.state);
 };
 
-const load = global => {
+const restore = global => {
   global.state = global.savedState;
 };
 
@@ -43,7 +43,7 @@ const startGame = ({ rows, columns, state } = { rows: 17, columns: 17 }) => {
       save(global);
     }
     if (key && key.name === "l") {
-      load(global);
+      restore(global);
     }
     if (key && key.ctrl && key.name === "d") {
       dump(global.state);
