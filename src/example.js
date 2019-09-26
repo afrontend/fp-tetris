@@ -12,17 +12,15 @@ program
   .option("-f, --full", "terminal full size")
   .parse(process.argv);
 
-function getColor(item) {
-  if (item.color) {
-    console.log(item.color);
-    return item.color;
-  } else {
-    return 'black';
+function getColorItem(item) {
+  if (chalk[item.color]) {
+    return chalk[item.color]("■");
   }
+  return chalk.blue("■");
 }
 
 const getMark = item => {
-  return game.isBlank(item) ? " " : chalk.blue("■");
+  return game.isBlank(item) ? "." : getColorItem(item);
 };
 
 const dump = state => {
