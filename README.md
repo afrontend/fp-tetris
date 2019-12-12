@@ -1,4 +1,4 @@
-# fp-tetris [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+# fp-tetris
 > library for [fp-tetris-game](https://github.com/afrontend/fp-tetris-game)
 
 ![console tetris screenshot](https://agvim.files.wordpress.com/2019/03/fp-tetris.png "console tetris screenshot")
@@ -19,14 +19,4 @@ $ npm start
 
 ## License
 
-MIT © [Bob Hwang](https://agvim.wordpress.com)
-
-
-[npm-image]: https://badge.fury.io/js/fp-tetris.svg
-[npm-url]: https://npmjs.org/package/fp-tetris
-[travis-image]: https://travis-ci.org/afrontend/fp-tetris.svg?branch=master
-[travis-url]: https://travis-ci.org/afrontend/fp-tetris
-[daviddm-image]: https://david-dm.org/afrontend/fp-tetris.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/afrontend/fp-tetris
-[coveralls-image]: https://coveralls.io/repos/afrontend/fp-tetris/badge.svg
-[coveralls-url]: https://coveralls.io/r/afrontend/fp-tetris
+MIT © Bob Hwang
