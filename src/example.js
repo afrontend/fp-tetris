@@ -5,7 +5,7 @@ const keypress = require("keypress");
 const program = require("commander");
 const game = require("../lib/index.js");
 const pkg = require("../package.json");
-const chalk = require('chalk');
+const chalk = require("chalk");
 
 program
   .version(pkg.version)
