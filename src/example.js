@@ -12,15 +12,15 @@ program
   .option("-f, --full", "terminal full size")
   .parse(process.argv);
 
-function getColorItem(item) {
+function getColorItem(item, char) {
   if (chalk[item.color]) {
-    return chalk[item.color]("■");
+    return chalk[item.color](char);
   }
-  return chalk.blue("■");
+  return chalk.blue(char);
 }
 
 const getMark = item => {
-  return game.isBlank(item) ? "." : getColorItem(item);
+  return game.isBlank(item) ? "." : getColorItem(item, "■");
 };
 
 const dump = state => {
