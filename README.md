@@ -1,14 +1,14 @@
 # fp-tetris
-> library for [fp-tetris-game](https://github.com/afrontend/fp-tetris-game)
 
-![console tetris screenshot](https://agvim.files.wordpress.com/2019/03/fp-tetris.png "console tetris screenshot")
+> library for [fp-tetris-game](https://github.com/afrontend/fp-tetris-game)
 
 ## Just run
 
 ```sh
 $ npx fp-tetris
 ```
-![fp-tetris demo](demo.gif)
+
+![fp-tetris demo](https://github.com/afrontend/fp-tetris/releases/download/demo-assets/demo.gif)
 
 ## Run with source
 
