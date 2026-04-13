@@ -1,0 +1,47 @@
+name: Update Demo GIF
+
+on:
+  push:
+    branches: [master]
+
+permissions:
+  contents: write
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install asciinema
+        run: pip3 install asciinema
+
+      - name: Install agg
+        run: |
+          curl -sL \
+            https://github.com/asciinema/agg/releases/latest/download/agg-x86_64-unknown-linux-gnu \
+            -o /usr/local/bin/agg
+          chmod +x /usr/local/bin/agg
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate and upload demo GIF
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run release
+
+      - name: Commit README if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          if ! git diff --staged --quiet; then
+            git commit -m "docs: update demo GIF url [skip ci]"
+            git push
+          fi

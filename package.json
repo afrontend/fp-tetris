@@ -60,7 +60,8 @@
   "scripts": {
     "pretest": "eslint .",
     "test": "jest",
-    "start": "node ./src/example.js"
+    "start": "node ./src/example.js",
+    "release": "bash scripts/make-demo.sh"
   },
   "repository": "https://github.com/afrontend/fp-tetris.git",
   "jest": {
