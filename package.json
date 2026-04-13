@@ -61,7 +61,8 @@
     "pretest": "eslint .",
     "test": "jest",
     "start": "node ./src/example.js",
-    "release": "bash scripts/make-demo.sh"
+    "release": "bash scripts/make-demo.sh",
+    "release:npm": "npm test && npm version patch && npm publish"
   },
   "repository": "https://github.com/afrontend/fp-tetris.git",
   "jest": {
