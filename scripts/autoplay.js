@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-'use strict';
+"use strict";
 
-const clear = require('clear');
-const game = require('../lib/index.js');
-const chalk = require('chalk');
+const clear = require("clear");
+const game = require("../lib/index.js");
+const chalk = require("chalk");
 
 function getColorItem(item, char) {
   if (chalk[item.color]) {
@@ -12,12 +12,12 @@ function getColorItem(item, char) {
   return chalk.blue(char);
 }
 
-const getMark = item => (game.isBlank(item) ? '.' : getColorItem(item, '■'));
+const getMark = item => (game.isBlank(item) ? "." : getColorItem(item, "■"));
 
 const format = ary =>
-  ary.map(r => r.map(item => getMark(item)).join(' ')).join('|\r\n');
+  ary.map(r => r.map(item => getMark(item)).join(" ")).join("|\r\n");
 
-const KEYS = ['left', 'right', 'down', 'up', 'space'];
+const KEYS = ["left", "right", "down", "up", "space"];
 const MAX_KEYS = 50;
 const TICK_INTERVAL = 200;
 const KEY_EVERY_N_TICKS = 3;
