@@ -17,7 +17,7 @@ const getMark = item => (game.isBlank(item) ? "." : getColorItem(item, "■"));
 const format = ary =>
   ary.map(r => r.map(item => getMark(item)).join(" ")).join("|\r\n");
 
-const KEYS = ["left", "right", "down", "up", "space"];
+const KEYS = ["left", "right", "down", "up"];
 const MAX_KEYS = 50;
 const TICK_INTERVAL = 200;
 const KEY_EVERY_N_TICKS = 3;
