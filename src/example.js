@@ -27,16 +27,16 @@ const dump = state => {
   console.log(JSON.stringify(state));
 };
 
-const save = global => {
-  global.savedState = _.cloneDeep(global.state);
+const save = gameCtx => {
+  gameCtx.savedState = _.cloneDeep(gameCtx.state);
 };
 
-const reload = global => {
-  global.state = global.savedState;
+const reload = gameCtx => {
+  gameCtx.state = gameCtx.savedState;
 };
 
 const startGame = ({ rows, columns, state } = { rows: 17, columns: 17 }) => {
-  const global = {
+  const gameCtx = {
     state: game.init({ rows, columns, state })
   };
 
@@ -45,22 +45,17 @@ const startGame = ({ rows, columns, state } = { rows: 17, columns: 17 }) => {
   process.stdin.on("keypress", (ch, key) => {
     if (key && key.ctrl && key.name === "c") {
       process.exit();
-    }
-    if (key && key.name === "q") {
+    } else if (key && key.name === "q") {
       process.exit();
-    }
-    if (key && key.name === "s") {
-      save(global);
-    }
-    if (key && key.name === "l") {
-      reload(global);
-    }
-    if (key && key.ctrl && key.name === "d") {
-      dump(global.state);
+    } else if (key && key.name === "s") {
+      save(gameCtx);
+    } else if (key && key.name === "l") {
+      reload(gameCtx);
+    } else if (key && key.ctrl && key.name === "d") {
+      dump(gameCtx.state);
       process.exit();
-    }
-    if (key) {
-      global.state = game.key(key.name, global.state);
+    } else if (key) {
+      gameCtx.state = game.key(key.name, gameCtx.state);
     }
   });
 
@@ -70,18 +65,21 @@ const startGame = ({ rows, columns, state } = { rows: 17, columns: 17 }) => {
   const format = ary =>
     ary.map(r => r.map(item => getMark(item)).join(" ")).join("|\r\n");
 
-  global.timer = setInterval(() => {
-    global.state = game.tick(global.state);
+  gameCtx.timer = setInterval(() => {
+    gameCtx.state = game.tick(gameCtx.state);
     if (!program.full) {
       clear();
     }
-    console.log(format(game.join(global.state)));
+    console.log(format(game.join(gameCtx.state)));
   }, 200);
 };
 
 const activate = program => {
   if (program.full) {
-    startGame(process.stdout.rows - 1, process.stdout.columns / 2 - 1);
+    startGame({
+      rows: process.stdout.rows - 1,
+      columns: Math.floor(process.stdout.columns / 2) - 1
+    });
   } else {
     startGame();
   }
