@@ -2,7 +2,7 @@
 const _ = require("lodash");
 const clear = require("clear");
 const keypress = require("keypress");
-const program = require("commander");
+const { program } = require("commander");
 const game = require("../lib/index.js");
 const pkg = require("../package.json");
 const chalk = require("chalk");
@@ -67,15 +67,15 @@ const startGame = ({ rows, columns, state } = { rows: 17, columns: 17 }) => {
 
   gameCtx.timer = setInterval(() => {
     gameCtx.state = game.tick(gameCtx.state);
-    if (!program.full) {
+    if (!program.opts().full) {
       clear();
     }
     console.log(format(game.join(gameCtx.state)));
   }, 200);
 };
 
-const activate = (program) => {
-  if (program.full) {
+const activate = () => {
+  if (program.opts().full) {
     startGame({
       rows: process.stdout.rows - 1,
       columns: Math.floor(process.stdout.columns / 2) - 1,
@@ -85,4 +85,4 @@ const activate = (program) => {
   }
 };
 
-activate(program);
+activate();
