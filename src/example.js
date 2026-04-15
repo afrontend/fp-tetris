@@ -19,25 +19,25 @@ function getColorItem(item, char) {
   return chalk.blue(char);
 }
 
-const getMark = item => {
+const getMark = (item) => {
   return game.isBlank(item) ? "." : getColorItem(item, "■");
 };
 
-const dump = state => {
+const dump = (state) => {
   console.log(JSON.stringify(state));
 };
 
-const save = gameCtx => {
+const save = (gameCtx) => {
   gameCtx.savedState = _.cloneDeep(gameCtx.state);
 };
 
-const reload = gameCtx => {
+const reload = (gameCtx) => {
   gameCtx.state = gameCtx.savedState;
 };
 
 const startGame = ({ rows, columns, state } = { rows: 17, columns: 17 }) => {
   const gameCtx = {
-    state: game.init({ rows, columns, state })
+    state: game.init({ rows, columns, state }),
   };
 
   keypress(process.stdin);
@@ -62,8 +62,8 @@ const startGame = ({ rows, columns, state } = { rows: 17, columns: 17 }) => {
   process.stdin.setRawMode(true);
   process.stdin.resume();
 
-  const format = ary =>
-    ary.map(r => r.map(item => getMark(item)).join(" ")).join("|\r\n");
+  const format = (ary) =>
+    ary.map((r) => r.map((item) => getMark(item)).join(" ")).join("|\r\n");
 
   gameCtx.timer = setInterval(() => {
     gameCtx.state = game.tick(gameCtx.state);
@@ -74,11 +74,11 @@ const startGame = ({ rows, columns, state } = { rows: 17, columns: 17 }) => {
   }, 200);
 };
 
-const activate = program => {
+const activate = (program) => {
   if (program.full) {
     startGame({
       rows: process.stdout.rows - 1,
-      columns: Math.floor(process.stdout.columns / 2) - 1
+      columns: Math.floor(process.stdout.columns / 2) - 1,
     });
   } else {
     startGame();

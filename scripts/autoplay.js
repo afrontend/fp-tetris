@@ -12,10 +12,10 @@ function getColorItem(item, char) {
   return chalk.blue(char);
 }
 
-const getMark = item => (game.isBlank(item) ? "." : getColorItem(item, "■"));
+const getMark = (item) => (game.isBlank(item) ? "." : getColorItem(item, "■"));
 
-const format = ary =>
-  ary.map(r => r.map(item => getMark(item)).join(" ")).join("|\r\n");
+const format = (ary) =>
+  ary.map((r) => r.map((item) => getMark(item)).join(" ")).join("|\r\n");
 
 const TICK_INTERVAL = 150;
 const MAX_PIECES = 30;
@@ -23,8 +23,8 @@ const MAX_PIECES = 30;
 // Count non-blank cells in the background panel
 function countFilled(bgPanel) {
   return bgPanel.reduce(
-    (sum, row) => sum + row.filter(item => !game.isBlank(item)).length,
-    0
+    (sum, row) => sum + row.filter((item) => !game.isBlank(item)).length,
+    0,
   );
 }
 
@@ -110,7 +110,7 @@ function getBestMove(state) {
           ...Array(rot).fill("up"),
           ...Array(cols).fill("left"),
           ...Array(r).fill("right"),
-          "space"
+          "space",
         ];
       }
 
