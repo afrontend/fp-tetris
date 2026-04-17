@@ -44,7 +44,7 @@
     "pretest": "eslint .",
     "test": "jest",
     "start": "node ./src/example.js",
-    "release": "bash scripts/make-demo.sh"
+    "demo-gif": "bash scripts/make-demo.sh"
   },
   "repository": "https://github.com/afrontend/fp-tetris.git",
   "jest": {
@@ -55,7 +55,7 @@
     "chalk": "^4.1.2",
     "clear": "^0.1.0",
     "commander": "^14.0.3",
-    "fp-panel": "^0.0.8",
+    "fp-panel": "^0.0.9",
     "keypress": "^0.2.1",
     "lodash": "^4.17.19"
   }

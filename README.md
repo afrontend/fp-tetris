@@ -118,10 +118,10 @@ brew install agg
 brew install gh && gh auth login
 
 # 데모 생성 및 GitHub Releases 업로드
-npm run release
+npm run demo-gif
 ```
 
-`npm run release` 실행 순서:
+`npm run demo-gif` 실행 순서:
 
 1. `scripts/autoplay.js` — AI가 게임을 자동 플레이하고 자동 종료
 2. `asciinema rec` — 터미널 출력을 `demo.cast`로 녹화
