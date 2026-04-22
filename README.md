@@ -39,61 +39,58 @@ npm start
 | `l` | Load saved state |
 | `q` / `Ctrl+C` | Quit |
 
-## Library API
+## How fp-tetris uses fp-panel
 
-Install as a dependency:
+fp-tetris uses [fp-panel](https://github.com/afrontend/fp-panel) as its 2D grid engine. Here is the step-by-step flow:
 
-```sh
-npm install fp-tetris
-```
+### Step 1 — Create the board
 
-```js
-const game = require('fp-tetris');
-```
-
-### `game.init({ rows, columns })`
-
-Creates the initial game state.
+`p.createPanel(rows, columns)` builds the background grid. Each cell is initialized with `p.createItem(color)`.
 
 ```js
-let state = game.init({ rows: 20, columns: 10 });
+const bgPanel = p.createPanel(20, 10);
 ```
 
-### `game.tick(state)`
+### Step 2 — Spawn a tetromino
 
-Advances the game by one tick (drops the active piece one row). Returns updated state.
+Each piece is painted onto a small panel with `p.paint(panel, cells, color)`, then centered with `p.adjustToCenter(panel)`.
 
 ```js
-state = game.tick(state);
+const toolPanel = _.flow([createPanel, paintT, p.adjustToCenter])();
+// paintT places the T-piece cells; adjustToCenter shifts the panel to the middle of the board
 ```
 
-### `game.key(keyName, state)`
+### Step 3 — Move and rotate
 
-Applies a key input. Valid key names: `'left'`, `'right'`, `'up'`, `'down'`, `'space'`, `'p'`, `'r'`.
-Returns updated state.
+The active piece panel is repositioned each frame using `p.left()`, `p.right()`, `p.down()`, or `p.rotate()`. Before applying the move, collision is checked:
 
 ```js
-state = game.key('left', state);
+if (!p.isOnTheLeftEdge(toolPanel) && !p.isOverlap(bgPanel, p.left(toolPanel))) {
+  toolPanel = p.left(toolPanel);
+}
 ```
 
-### `game.join(state)`
+Edge detection helpers (`p.isOnTheLeftEdge`, `p.isOnTheRightEdge`, `p.isOnTheBottomEdge`) prevent the piece from leaving the board.
 
-Merges the background panel and the active piece into a single 2D array for rendering.
+### Step 4 — Land and clear rows
+
+When the piece can no longer move down, it is merged into the background with `p.add([bgPanel, toolPanel])`. Full rows (no blank cells) are then removed and replaced with empty rows at the top.
 
 ```js
-const panel = game.join(state);
-panel.forEach(row => {
-  console.log(row.map(item => game.isBlank(item) ? '.' : '■').join(' '));
+const newBgPanel = p.add([bgPanel, toolPanel]);
+// then filter out full rows and prepend empty ones
+```
+
+### Step 5 — Render
+
+To draw the current frame, the two panels are merged again with `p.add()` and each cell is inspected with `p.isBlankItem()`.
+
+```js
+const frame = p.add([bgPanel, toolPanel]);
+frame.forEach(row => {
+  console.log(row.map(cell => p.isBlankItem(cell) ? '.' : '■').join(' '));
 });
 ```
-
-### `game.isBlank(item)`
-
-Returns `true` if a cell is empty.
-
-### `game.toArray(state)`
-
-Returns `[bgPanel, toolPanel]` as deep-cloned arrays.
 
 ## Tetrominoes
 
