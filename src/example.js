@@ -35,9 +35,25 @@ const reload = (gameCtx) => {
   gameCtx.state = gameCtx.savedState;
 };
 
+const HELP_TEXT = [
+  "",
+  "  Controls:",
+  "  ← →      Move left / right",
+  "  ↓         Move down",
+  "  ↑         Rotate piece",
+  "  Space     Hard drop",
+  "  p         Pause / resume",
+  "  r         Rotate background",
+  "  s         Save state",
+  "  l         Load state",
+  "  h         Toggle this help",
+  "  q / ^C    Quit",
+].join("\r\n");
+
 const startGame = ({ rows, columns, state } = { rows: 17, columns: 17 }) => {
   const gameCtx = {
     state: game.init({ rows, columns, state }),
+    showHelp: false,
   };
 
   keypress(process.stdin);
@@ -47,6 +63,8 @@ const startGame = ({ rows, columns, state } = { rows: 17, columns: 17 }) => {
       process.exit();
     } else if (key && key.name === "q") {
       process.exit();
+    } else if (key && key.name === "h") {
+      gameCtx.showHelp = !gameCtx.showHelp;
     } else if (key && key.name === "s") {
       save(gameCtx);
     } else if (key && key.name === "l") {
@@ -66,11 +84,16 @@ const startGame = ({ rows, columns, state } = { rows: 17, columns: 17 }) => {
     ary.map((r) => r.map((item) => getMark(item)).join(" ")).join("|\r\n");
 
   gameCtx.timer = setInterval(() => {
-    gameCtx.state = game.tick(gameCtx.state);
+    if (!gameCtx.showHelp) {
+      gameCtx.state = game.tick(gameCtx.state);
+    }
     if (!program.opts().full) {
       clear();
     }
     console.log(format(game.join(gameCtx.state)));
+    if (gameCtx.showHelp) {
+      console.log(HELP_TEXT);
+    }
   }, 200);
 };
 

@@ -27,6 +27,8 @@ npm start
 
 ## Controls
 
+> **Tip:** Press `h` during the game to show/hide the key list. The piece freezes while the help is open.
+
 | Key | Action |
 |-----|--------|
 | `←` `→` | Move piece left / right |
@@ -34,6 +36,7 @@ npm start
 | `↑` | Rotate piece |
 | `Space` | Hard drop |
 | `p` | Pause / resume |
+| `h` | **Show / hide in-game key help** |
 | `r` | Rotate the background panel |
 | `s` | Save current state |
 | `l` | Load saved state |
