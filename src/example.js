@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-const _ = require("lodash");
 const clear = require("clear");
 const keypress = require("keypress");
 const { program } = require("commander");
@@ -28,7 +27,7 @@ const dump = (state) => {
 };
 
 const save = (gameCtx) => {
-  gameCtx.savedState = _.cloneDeep(gameCtx.state);
+  gameCtx.savedState = structuredClone(gameCtx.state);
 };
 
 const reload = (gameCtx) => {
