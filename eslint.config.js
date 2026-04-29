@@ -23,6 +23,7 @@ module.exports = [
         clearInterval: "readonly",
         setTimeout: "readonly",
         clearTimeout: "readonly",
+        structuredClone: "readonly",
       },
     },
     plugins: {

@@ -56,7 +56,6 @@
     "clear": "^0.1.0",
     "commander": "^14.0.3",
     "fp-panel": "^0.0.9",
-    "keypress": "^0.2.1",
-    "lodash": "^4.17.19"
+    "keypress": "^0.2.1"
   }
 }
