@@ -42,7 +42,7 @@
   },
   "scripts": {
     "pretest": "eslint .",
-    "test": "jest",
+    "test": "jest --ci --forceExit",
     "start": "node ./src/example.js",
     "demo-gif": "bash scripts/make-demo.sh"
   },

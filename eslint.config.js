@@ -3,6 +3,7 @@ const prettier = require("eslint-config-prettier");
 const prettierPlugin = require("eslint-plugin-prettier");
 
 module.exports = [
+  { ignores: ["coverage/**"] },
   js.configs.recommended,
   prettier,
   {
