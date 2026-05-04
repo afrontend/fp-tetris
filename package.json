@@ -26,9 +26,9 @@
     "eslint": "^9.0.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
-    "jest": "^29.0.1",
     "lint-staged": "^13.0.3",
-    "prettier": "^3.0.0"
+    "prettier": "^3.0.0",
+    "vitest": "^3.2.4"
   },
   "lint-staged": {
     "*.js": [
@@ -42,14 +42,12 @@
   },
   "scripts": {
     "pretest": "eslint .",
-    "test": "jest --ci --forceExit",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "start": "node ./src/example.js",
     "demo-gif": "bash scripts/make-demo.sh"
   },
   "repository": "https://github.com/afrontend/fp-tetris.git",
-  "jest": {
-    "testEnvironment": "node"
-  },
   "license": "MIT",
   "dependencies": {
     "chalk": "^4.1.2",
