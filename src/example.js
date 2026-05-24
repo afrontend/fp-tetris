@@ -27,7 +27,8 @@ const dump = (state) => {
 };
 
 const save = (gameCtx) => {
-  gameCtx.savedState = structuredClone(gameCtx.state);
+  const { pieceSelector, ...serializableState } = gameCtx.state;
+  gameCtx.savedState = { ...structuredClone(serializableState), pieceSelector };
 };
 
 const reload = (gameCtx) => {
