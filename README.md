@@ -2,13 +2,19 @@
 
 > Tetris game library and CLI — also used by [fp-tetris-game](https://github.com/afrontend/fp-tetris-game)
 
+![fp-tetris demo](https://github.com/afrontend/fp-tetris/releases/download/demo-assets/demo.gif)
+
 ## Just run
 
 ```sh
 npx fp-tetris
 ```
 
-![fp-tetris demo](https://github.com/afrontend/fp-tetris/releases/download/demo-assets/demo.gif)
+Use `--full` to fill the entire terminal window:
+
+```sh
+npx fp-tetris --full
+```
 
 ## Run with source
 
@@ -27,8 +33,6 @@ npm start
 
 ## Controls
 
-> **Tip:** Press `h` during the game to show/hide the key list. The piece freezes while the help is open.
-
 | Key | Action |
 |-----|--------|
 | `←` `→` | Move piece left / right |
@@ -36,11 +40,12 @@ npm start
 | `↑` | Rotate piece |
 | `Space` | Hard drop |
 | `p` | Pause / resume |
-| `h` | **Show / hide in-game key help** |
+| `h` | Toggle help |
 | `r` | Rotate the background panel |
-| `s` | Save current state |
+| `s` | Save state |
 | `l` | Load saved state |
 | `q` / `Ctrl+C` | Quit |
+| `Ctrl+D` | Dump state (JSON) and quit |
 
 ## How fp-tetris uses fp-panel
 
@@ -107,29 +112,29 @@ frame.forEach(row => {
 | S | Green |
 | Z | Red |
 
-## Updating the Demo GIF
+## Demo GIF 업데이트
 
-Regenerates the terminal preview automatically.
+터미널 동작 미리보기를 자동으로 재생성합니다.
 
 ```sh
-# Install dependencies (first time only)
+# 의존 도구 설치 (최초 1회)
 brew install asciinema
 brew install agg
 brew install gh && gh auth login
 
-# Generate and upload to GitHub Releases
+# 데모 생성 및 GitHub Releases 업로드
 npm run demo-gif
 ```
 
-`npm run demo-gif` steps:
+`npm run demo-gif` 실행 순서:
 
-1. `scripts/autoplay.js` — autoplays the game and exits automatically
-2. `asciinema rec` — records terminal output to `demo.cast`
-3. `agg` — converts `demo.cast` → `demo.gif`
-4. `gh release upload` — uploads to the `demo-assets` GitHub Release tag
-5. `README.md` — updates the GIF URL to the GitHub Releases path
+1. `scripts/autoplay.js` — AI가 게임을 자동 플레이하고 자동 종료
+2. `asciinema rec` — 터미널 출력을 `demo.cast`로 녹화
+3. `agg` — `demo.cast` → `demo.gif` 변환
+4. `gh release upload` — GitHub Releases `demo-assets` 태그에 업로드
+5. `README.md` — GIF URL을 GitHub Releases 경로로 교체
 
-Pushing to the master branch triggers `.github/workflows/demo.yml`, which runs all of the above automatically.
+master 브랜치에 푸시하면 `.github/workflows/demo.yml`이 위 과정을 자동으로 실행합니다.
 
 ## License
 
