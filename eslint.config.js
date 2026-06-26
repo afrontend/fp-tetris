@@ -38,7 +38,6 @@ module.exports = [
     files: ["**/*.test.js", "**/__tests__/**/*.js"],
     languageOptions: {
       globals: {
-        jest: "readonly",
         describe: "readonly",
         it: "readonly",
         expect: "readonly",
@@ -47,6 +46,8 @@ module.exports = [
         afterEach: "readonly",
         beforeAll: "readonly",
         afterAll: "readonly",
+        vi: "readonly",
+        vitest: "readonly",
       },
     },
   },
