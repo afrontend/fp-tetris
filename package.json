@@ -22,23 +22,12 @@
     "game"
   ],
   "devDependencies": {
-    "@eslint/js": "^9.0.0",
-    "eslint": "^9.0.0",
-    "eslint-config-prettier": "^9.0.0",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.4.0",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.0.0",
-    "lint-staged": "^13.0.3",
     "prettier": "^3.0.0",
-    "vitest": "^3.2.4"
-  },
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "git add"
-    ],
-    "*.json": [
-      "prettier --write",
-      "git add"
-    ]
+    "vitest": "^4.1.7"
   },
   "scripts": {
     "pretest": "eslint .",
