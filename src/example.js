@@ -82,18 +82,24 @@ const startGame = (rows = 17, columns = 17) => {
   process.stdin.on("keypress", (ch, key) => {
     if (key && key.ctrl && key.name === "c") {
       process.exit();
-    } else if (key && key.name === "q") {
+    }
+    if (key && key.name === "q") {
       process.exit();
-    } else if (key && key.name === "h") {
+    }
+    if (key && key.name === "h") {
       gameCtx.showHelp = !gameCtx.showHelp;
-    } else if (key && key.name === "s") {
+    }
+    if (key && key.name === "s") {
       save(gameCtx);
-    } else if (key && key.name === "l") {
+    }
+    if (key && key.name === "l") {
       reload(gameCtx);
-    } else if (key && key.ctrl && key.name === "d") {
+    }
+    if (key && key.ctrl && key.name === "d") {
       dump(gameCtx.state);
       process.exit();
-    } else if (key) {
+    }
+    if (key) {
       gameCtx.state = game.key(key.name, gameCtx.state);
     }
   });
