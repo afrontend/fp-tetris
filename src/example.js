@@ -18,9 +18,7 @@ function getColorItem(item, char) {
   return chalk.blue(char);
 }
 
-const getMark = (item) => {
-  return game.isBlank(item) ? "." : getColorItem(item, "■");
-};
+const getMark = (item) => (game.isBlank(item) ? "." : getColorItem(item, "■"));
 
 const format = (ary) =>
   ary.map((r) => r.map((item) => getMark(item)).join(" ")).join("|\r\n");
