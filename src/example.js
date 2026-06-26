@@ -22,6 +22,9 @@ const getMark = (item) => {
   return game.isBlank(item) ? "." : getColorItem(item, "■");
 };
 
+const format = (ary) =>
+  ary.map((r) => r.map((item) => getMark(item)).join(" ")).join("|\r\n");
+
 const dump = (state) => {
   console.log(JSON.stringify(state));
 };
@@ -101,9 +104,6 @@ const startGame = (rows = 17, columns = 17) => {
 
   process.stdin.setRawMode(true);
   process.stdin.resume();
-
-  const format = (ary) =>
-    ary.map((r) => r.map((item) => getMark(item)).join(" ")).join("|\r\n");
 
   const render = () => {
     if (!program.opts().full) clear();
