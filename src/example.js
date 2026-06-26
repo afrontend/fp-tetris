@@ -95,6 +95,7 @@ const startGame = (rows = 17, columns = 17) => {
       process.exit();
     } else if (key) {
       gameCtx.state = game.key(key.name, gameCtx.state);
+      render();
     }
   });
 
@@ -104,17 +105,19 @@ const startGame = (rows = 17, columns = 17) => {
   const format = (ary) =>
     ary.map((r) => r.map((item) => getMark(item)).join(" ")).join("|\r\n");
 
-  gameCtx.timer = setInterval(() => {
-    if (!gameCtx.showHelp) {
-      gameCtx.state = game.tick(gameCtx.state);
-    }
-    if (!program.opts().full) {
-      clear();
-    }
+  const render = () => {
+    if (!program.opts().full) clear();
     console.log(format(game.join(gameCtx.state)));
     if (gameCtx.showHelp) {
       console.log(HELP_TEXT);
     }
+  };
+
+  gameCtx.timer = setInterval(() => {
+    if (!gameCtx.showHelp) {
+      gameCtx.state = game.tick(gameCtx.state);
+    }
+    render();
   }, 200);
 };
 
