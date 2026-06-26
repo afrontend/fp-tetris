@@ -50,6 +50,27 @@ const HELP_TEXT = [
   "  q / ^C    Quit",
 ].join("\r\n");
 
+const runCountdown = (onDone) => {
+  const counts = [5, 4, 3, 2, 1];
+  let i = 0;
+
+  const tick = () => {
+    clear();
+    console.log("\r\n");
+    console.log(chalk.yellow("  fp-tetris\r\n"));
+    console.log(chalk.cyan("  Press [ h ] for help\r\n"));
+    console.log(chalk.white("  Starting in... ") + chalk.bold.green(counts[i]));
+    i++;
+    if (i < counts.length) {
+      setTimeout(tick, 1000);
+    } else {
+      setTimeout(onDone, 1000);
+    }
+  };
+
+  tick();
+};
+
 const startGame = ({ rows, columns, state } = { rows: 17, columns: 17 }) => {
   const gameCtx = {
     state: game.init({ rows, columns, state }),
@@ -83,18 +104,20 @@ const startGame = ({ rows, columns, state } = { rows: 17, columns: 17 }) => {
   const format = (ary) =>
     ary.map((r) => r.map((item) => getMark(item)).join(" ")).join("|\r\n");
 
-  gameCtx.timer = setInterval(() => {
-    if (!gameCtx.showHelp) {
-      gameCtx.state = game.tick(gameCtx.state);
-    }
-    if (!program.opts().full) {
-      clear();
-    }
-    console.log(format(game.join(gameCtx.state)));
-    if (gameCtx.showHelp) {
-      console.log(HELP_TEXT);
-    }
-  }, 200);
+  runCountdown(() => {
+    gameCtx.timer = setInterval(() => {
+      if (!gameCtx.showHelp) {
+        gameCtx.state = game.tick(gameCtx.state);
+      }
+      if (!program.opts().full) {
+        clear();
+      }
+      console.log(format(game.join(gameCtx.state)));
+      if (gameCtx.showHelp) {
+        console.log(HELP_TEXT);
+      }
+    }, 200);
+  });
 };
 
 const activate = () => {
