@@ -64,16 +64,16 @@ const runCountdown = (rows, columns) => {
     if (i < counts.length) {
       setTimeout(tick, 1000);
     } else {
-      setTimeout(() => startGame({ rows, columns }), 1000);
+      setTimeout(() => startGame(rows, columns), 1000);
     }
   };
 
   tick();
 };
 
-const startGame = ({ rows = 17, columns = 17, state } = {}) => {
+const startGame = (rows = 17, columns = 17) => {
   const gameCtx = {
-    state: game.init({ rows, columns, state }),
+    state: game.init({ rows, columns }),
     showHelp: false,
   };
 
