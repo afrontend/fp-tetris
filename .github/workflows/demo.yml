@@ -3,6 +3,12 @@ name: Update Demo GIF
 on:
   push:
     branches: [master]
+    paths-ignore:
+      - 'README.md'
+      - 'demo.cast'
+      - 'demo.gif'
+      - '.github/workflows/demo.yml'
+      - 'docs/**'
 
 permissions:
   contents: write
@@ -34,7 +40,7 @@ jobs:
       - name: Generate and upload demo GIF
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm run release
+        run: npm run demo-gif
 
       - name: Commit README if changed
         run: |
