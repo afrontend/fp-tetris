@@ -2,3 +2,7 @@ node_modules
 coverage
 demo.cast
 demo.gif
+
+.codegraph
+.codegraphignore
+docs
