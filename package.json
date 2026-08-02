@@ -14,7 +14,7 @@
   ],
   "main": "lib/index.js",
   "bin": {
-    "fp-tetris": "./src/example.js"
+    "fp-tetris": "src/example.js"
   },
   "keywords": [
     "javascript",
@@ -36,7 +36,10 @@
     "start": "node ./src/example.js",
     "demo-gif": "bash scripts/make-demo.sh"
   },
-  "repository": "https://github.com/afrontend/fp-tetris.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/afrontend/fp-tetris.git"
+  },
   "license": "MIT",
   "dependencies": {
     "chalk": "^4.1.2",
