@@ -1,0 +1,30 @@
+# 의존성 패키지 (용량이 크고 분석이 필요 없는 경우가 많음)
+node_modules/
+venv/
+.venv/
+env/
+
+# 빌드 결과물 및 캐시
+dist/
+build/
+out/
+.next/
+.cache/
+*.pyc
+
+# 로그 및 데이터베이스
+*.log
+*.sqlite
+*.db
+
+# 환경 변수 및 민감 정보 (보안상 필수!)
+.env
+.env.*
+*.pem
+*.key
+
+# 대용량 미디어 파일
+*.mp4
+*.zip
+*.png
+*.jpg

@@ -27,25 +27,40 @@ npm start
 
 ### CLI options
 
-| Option | Description |
-|--------|-------------|
-| `-f, --full` | Use full terminal size for the board |
+| 옵션 | 설명 |
+|--------|------|
+| `-f, --full` | 터미널 전체 크기로 게임판을 표시한다. |
+| `--rows <number>` | 게임판 행 수를 지정한다. |
+| `--columns <number>` | 게임판 열 수를 지정한다. |
+
+`--full`과 크기 옵션을 함께 사용하면 `--full`이 우선한다.
 
 ## Controls
 
-| Key | Action |
-|-----|--------|
-| `←` `→` | Move piece left / right |
-| `↓` | Move piece down |
-| `↑` | Rotate piece |
-| `Space` | Hard drop |
-| `p` | Pause / resume |
-| `h` | Toggle help |
-| `r` | Rotate the background panel |
-| `s` | Save state |
-| `l` | Load saved state |
-| `q` / `Ctrl+C` | Quit |
-| `Ctrl+D` | Dump state (JSON) and quit |
+| 키 | 동작 |
+|----|------|
+| `←` `→` | 블록 좌우 이동 |
+| `↓` | 빠르게 내리기 |
+| `↑` | 블록 회전 |
+| `Space` | 즉시 낙하 |
+| `p` | 일시정지 / 재개 |
+| `h` | 도움말 열기 / 닫기 |
+| `s` | 빠른 저장 |
+| `l` | 빠른 불러오기 |
+| `q` / `Ctrl+C` | 종료 |
+| `Ctrl+D` | 복원 가능한 스냅숏 JSON을 출력하고 종료 |
+
+빠른 저장 상태는 현재 실행 중에만 유지된다. 게임은 3초 카운트다운 후 시작하며 제거한 줄 수에 따라 빨라진다.
+
+## 공통 상태 API
+
+```js
+const snapshot = game.serializeState(state);
+const restored = game.restoreState(snapshot);
+const interval = game.getTickInterval(state);
+```
+
+스냅숏은 `{ game: 'fp-tetris', version: 1, state }` 형식의 JSON-safe 객체다. `init()`은 `init({ rows, columns })`와 기존 `init(rows, columns)`을 모두 지원하며 크기는 1~500으로 보정한다.
 
 ## How fp-tetris uses fp-panel
 

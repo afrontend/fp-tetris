@@ -26,7 +26,11 @@ jobs:
           cache: 'npm'
 
       - name: Install asciinema
-        run: pip3 install asciinema
+        run: |
+          curl -sL \
+            https://github.com/asciinema/asciinema/releases/latest/download/asciinema-x86_64-unknown-linux-gnu \
+            -o /usr/local/bin/asciinema
+          chmod +x /usr/local/bin/asciinema
 
       - name: Install agg
         run: |
