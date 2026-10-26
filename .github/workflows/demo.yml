@@ -20,26 +20,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      # 쓰기 권한이 있는 job 이므로 action 은 커밋 SHA 로 고정한다 (Dependabot 이 갱신).
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: 20
+          node-version: '24'
           cache: 'npm'
 
-      - name: Install asciinema
+      # 바이너리도 버전과 sha256 을 고정한다. Dependabot 이 갱신하지 않으므로 올릴 때는
+      # 릴리스 페이지의 sha256 digest 로 버전과 체크섬을 함께 바꾼다.
+      - name: Install asciinema and agg
+        env:
+          ASCIINEMA_VERSION: v3.2.1
+          ASCIINEMA_SHA256: 1b405bbda565b33c3c4718de67fedc3535580603c0694b1ff3fb04f363430a20
+          AGG_VERSION: v1.9.0
+          AGG_SHA256: f111e315cd71056b116302342553dd765b7297579ed511f111d0cedb442aeda6
         run: |
-          curl -sL \
-            https://github.com/asciinema/asciinema/releases/latest/download/asciinema-x86_64-unknown-linux-gnu \
-            -o /usr/local/bin/asciinema
-          chmod +x /usr/local/bin/asciinema
-
-      - name: Install agg
-        run: |
-          curl -sL \
-            https://github.com/asciinema/agg/releases/latest/download/agg-x86_64-unknown-linux-gnu \
-            -o /usr/local/bin/agg
-          chmod +x /usr/local/bin/agg
+          curl -fsSL -o /usr/local/bin/asciinema \
+            "https://github.com/asciinema/asciinema/releases/download/${ASCIINEMA_VERSION}/asciinema-x86_64-unknown-linux-gnu"
+          curl -fsSL -o /usr/local/bin/agg \
+            "https://github.com/asciinema/agg/releases/download/${AGG_VERSION}/agg-x86_64-unknown-linux-gnu"
+          echo "${ASCIINEMA_SHA256}  /usr/local/bin/asciinema" | sha256sum -c -
+          echo "${AGG_SHA256}  /usr/local/bin/agg" | sha256sum -c -
+          chmod +x /usr/local/bin/asciinema /usr/local/bin/agg
 
       - name: Install dependencies
         run: npm ci
