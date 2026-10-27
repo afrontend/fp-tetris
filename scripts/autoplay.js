@@ -1,15 +1,16 @@
 #!/usr/bin/env node
 "use strict";
 
-const clear = require("clear");
+const { inspect, styleText } = require("node:util");
 const game = require("../lib/index.js");
-const chalk = require("chalk");
+
+// 화면 지우기 + 커서를 맨 위로 (clear 패키지와 같은 시퀀스)
+const clear = () => process.stdout.write("\x1b[2J\x1b[0f");
 
 function getColorItem(item, char) {
-  if (chalk[item.color]) {
-    return chalk[item.color](char);
-  }
-  return chalk.blue(char);
+  // styleText 는 모르는 색 이름에 예외를 던지므로 없는 색(pink, orange 등)은 blue 로 그린다
+  const color = Object.hasOwn(inspect.colors, item.color) ? item.color : "blue";
+  return styleText(color, char);
 }
 
 const getMark = (item) => (game.isBlank(item) ? "." : getColorItem(item, "■"));

@@ -1,23 +1,57 @@
 #!/usr/bin/env node
-const clear = require("clear");
-const keypress = require("keypress");
-const { program } = require("commander");
+const { inspect, parseArgs, styleText } = require("node:util");
+const readline = require("node:readline");
 const game = require("../lib/index.js");
 const pkg = require("../package.json");
-const chalk = require("chalk");
 
-const parseInteger = (value) => Number.parseInt(value, 10);
+// 화면 지우기 + 커서를 맨 위로 (clear 패키지와 같은 시퀀스)
+const clear = () => process.stdout.write("\x1b[2J\x1b[0f");
 
-program
-  .version(pkg.version)
-  .option("-f, --full", "터미널 전체 크기 사용")
-  .option("--rows <number>", "게임판 행 수", parseInteger)
-  .option("--columns <number>", "게임판 열 수", parseInteger)
-  .parse(process.argv);
+const USAGE = [
+  "Usage: example [options]",
+  "",
+  "Options:",
+  "  -V, --version       버전 출력",
+  "  -f, --full          터미널 전체 크기 사용",
+  "  --rows <number>     게임판 행 수",
+  "  --columns <number>  게임판 열 수",
+  "  -h, --help          사용법 출력",
+].join("\n");
+
+const parseOptions = () => {
+  try {
+    return parseArgs({
+      options: {
+        version: { type: "boolean", short: "V" },
+        full: { type: "boolean", short: "f" },
+        rows: { type: "string" },
+        columns: { type: "string" },
+        help: { type: "boolean", short: "h" },
+      },
+    }).values;
+  } catch (error) {
+    console.error(`error: ${error.message}\n\n${USAGE}`);
+    process.exit(1);
+  }
+};
+
+const parseInteger = (value) =>
+  value === undefined ? undefined : Number.parseInt(value, 10);
+
+const args = parseOptions();
+if (args.version) {
+  console.log(pkg.version);
+  process.exit(0);
+}
+if (args.help) {
+  console.log(USAGE);
+  process.exit(0);
+}
 
 function getColorItem(item, char) {
-  if (chalk[item.color]) return chalk[item.color](char);
-  return chalk.blue(char);
+  // styleText 는 모르는 색 이름에 예외를 던지므로 없는 색(pink, orange 등)은 blue 로 그린다
+  const color = Object.hasOwn(inspect.colors, item.color) ? item.color : "blue";
+  return styleText(color, char);
 }
 
 const getMark = (item) => (game.isBlank(item) ? "." : getColorItem(item, "■"));
@@ -90,7 +124,7 @@ const startGame = (rows = 17, columns = 17) => {
     }, game.getTickInterval(gameCtx.state));
   };
 
-  keypress(process.stdin);
+  readline.emitKeypressEvents(process.stdin);
   process.stdin.on("keypress", (ch, key) => {
     if (key?.ctrl && key.name === "c") process.exit();
     if (key?.name === "q") process.exit();
@@ -122,9 +156,14 @@ const runCountdown = (rows, columns) => {
   const tick = () => {
     clear();
     console.log("\r\n");
-    console.log(chalk.yellow("  fp-tetris\r\n"));
-    console.log(chalk.cyan("  [ h ]를 누르면 도움말을 볼 수 있습니다.\r\n"));
-    console.log(chalk.white("  시작까지... ") + chalk.bold.green(count));
+    console.log(styleText("yellow", "  fp-tetris\r\n"));
+    console.log(
+      styleText("cyan", "  [ h ]를 누르면 도움말을 볼 수 있습니다.\r\n"),
+    );
+    console.log(
+      styleText("white", "  시작까지... ") +
+        styleText(["bold", "green"], String(count)),
+    );
     count -= 1;
     if (count > 0) setTimeout(tick, 1000);
     else setTimeout(() => startGame(rows, columns), 1000);
@@ -132,7 +171,11 @@ const runCountdown = (rows, columns) => {
   tick();
 };
 
-const options = program.opts();
+const options = {
+  full: args.full,
+  rows: parseInteger(args.rows),
+  columns: parseInteger(args.columns),
+};
 const rows = options.full
   ? Math.max(1, process.stdout.rows - 3)
   : (options.rows ?? 17);
