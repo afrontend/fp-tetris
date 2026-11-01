@@ -21,7 +21,10 @@ jobs:
 
     steps:
       # 쓰기 권한이 있는 job 이므로 action 은 커밋 SHA 로 고정한다 (Dependabot 이 갱신).
+      # 토큰을 .git/config 에 남기지 않는다 (같은 job 의 npm 설치 스크립트 등이 읽지 못하게). 푸시는 마지막 단계에서만 한다.
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
@@ -54,11 +57,14 @@ jobs:
         run: npm run demo-gif
 
       - name: Commit README if changed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add README.md
           if ! git diff --staged --quiet; then
             git commit -m "docs: update demo GIF url [skip ci]"
+            gh auth setup-git
             git push
           fi
