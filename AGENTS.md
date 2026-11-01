@@ -39,7 +39,7 @@ ESLint + Prettier are configured in `eslint.config.js`; `pretest` runs ESLint, s
 
 State machine on top of `fp-panel`. All transitions are pure and return a new state object. The state holds named panels (e.g. `bgPanel`, `toolPanel`) composed with `fp-panel` primitives.
 
-Shared API (same shape across fp-tetris / fp-block / fp-snake / fp-space / fp-sokoban):
+Shared API (same shape across fp-tetris / fp-block / fp-snake / fp-sokoban):
 
 | Export | Description |
 |---|---|
