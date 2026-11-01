@@ -153,4 +153,4 @@ master 브랜치에 푸시하면 `.github/workflows/demo.yml`이 위 과정을 �
 
 ## License
 
-MIT © Bob Hwang
+MIT © afrontend
