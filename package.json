@@ -10,7 +10,8 @@
   },
   "files": [
     "lib",
-    "src"
+    "src",
+    "!**/__tests__"
   ],
   "main": "lib/index.js",
   "bin": {
